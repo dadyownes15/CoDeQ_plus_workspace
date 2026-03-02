@@ -1,4 +1,4 @@
-model: mlp_big
+model: big_mlp
 seed: 42
 epochs: 300 
 batch_size: 128
