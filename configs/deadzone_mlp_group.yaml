@@ -41,6 +41,6 @@ optimizer:
 loss_terms:
   - name: group_lasso
     lambda: 1
-    kwargs: 
+    kwargs:
       lambda_linear: 0.0001
       lambda_conv: 0.0
