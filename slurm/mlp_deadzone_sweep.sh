@@ -33,6 +33,7 @@ CONFIGS=(
     configs/baseline_mlp.yaml
     configs/deadzone_mlp.yaml
     configs/deadzone_mlp_group.yaml
+    configs/deadzone_mlp_group_soft.yaml
 )
 
 echo "=== Array task ${SLURM_ARRAY_TASK_ID}: ${CONFIGS[$SLURM_ARRAY_TASK_ID]} ==="

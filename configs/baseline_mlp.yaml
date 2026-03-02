@@ -1,6 +1,6 @@
-model: mlp
+model: mlp_big
 seed: 42
-epochs: 100
+epochs: 300 
 batch_size: 128
 img_size: 32
 device: mps

@@ -44,6 +44,22 @@ class CifarMLP(nn.Module):
         return self.net(x.reshape(x.size(0), -1))
 
 
+class CifarMLPBig(nn.Module):
+    """Simple 3-layer MLP for CIFAR-10: 3072 → 120 → 84 → 10."""
+    def __init__(self, num_classes=10):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(3 * 32 * 32, 1024),
+            nn.ReLU(),
+            nn.Linear(1024, 256),
+            nn.ReLU(),
+            nn.Linear(256, num_classes),
+        )
+
+    def forward(self, x):
+        return self.net(x.reshape(x.size(0), -1))
+
+
 
 class MLP_small_fashion_mnist(nn.Module):
     def __init__(self) -> None:

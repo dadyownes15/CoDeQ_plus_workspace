@@ -18,7 +18,7 @@ from src.datasets import build_dataset_cifar
 from src.train import train, validate, save_checkpoint
 from src.structured_loss import LOSS_REGISTRY
 from src.bobs_calculator import compare_model
-from src.neural_networks import CifarMLP
+from src.neural_networks import CifarMLP, CifarMLPBig
 
 # ── Registries ──────────────────────────────────────────────
 QUANTIZER_REGISTRY = {
@@ -190,6 +190,8 @@ def main():
         model = timm.create_model(timm_name, pretrained=False, num_classes=10)
     elif model_name == "mlp":
         model = CifarMLP()
+    elif model_name == "big_mlp":
+        model = CifarMLPBig()
     else:
         raise ValueError(f"Unknown model: {model_name}")
     logger.debug("Model parameter count: %d", sum(p.numel() for p in model.parameters()))
@@ -295,6 +297,19 @@ def main():
             for layer in bobs_result.layer_results:
                 log_dict[f"bobs/layer/{layer.name}"] = layer.BOBs_compression_rate
             bobs_result.print()
+
+        # ── Per-layer norm tracking ────────────────────────
+        with torch.no_grad():
+            l2_sum, l2_count = 0.0, 0
+            for name, p in model.named_parameters():
+                l0 = torch.linalg.vector_norm(p, ord=0).item()
+                l2 = torch.linalg.vector_norm(p, ord=2).item()
+                log_dict[f"norms_l0/{name}"] = l0
+                log_dict[f"norms_l2/{name}"] = l2
+                l2_sum += l2
+                l2_count += 1
+            log_dict["norms_l2/sum"] = l2_sum
+            log_dict["norms_l2/avg"] = l2_sum / l2_count if l2_count else 0.0
 
         wandb.log(log_dict)
 

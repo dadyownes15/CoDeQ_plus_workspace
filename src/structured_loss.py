@@ -3,7 +3,7 @@ import torch.nn as nn
 import math
 
 
-def group_lasso(model, lambda_linear=1e-4, lambda_conv=1e-4):
+def group_lasso(model, lambda_linear, lambda_conv):
     """Group L2/L1 structured sparsity regularization.
 
     Computes L2 norm per row (output feature dimension), then sums (L1).
@@ -27,3 +27,4 @@ def group_lasso(model, lambda_linear=1e-4, lambda_conv=1e-4):
 LOSS_REGISTRY = {
     "group_lasso": group_lasso,
 }
+tw
