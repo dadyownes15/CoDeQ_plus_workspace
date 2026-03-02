@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH -p gpu
 #SBATCH --gres=gpu:titanrtx:1
-#SBATCH --exclude=hendrixgpu20fl
+#SBATCH --exclude=hendrixgpu20fl,hendrixgpu26fl
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=16G
 #SBATCH --time=2:00:00
 #SBATCH --job-name=mlp-dz-sweep
 #SBATCH --output=slurm-%A_%a.log
-#SBATCH --array=0-2
+#SBATCH --array=0-3
 
 set -euo pipefail
 
