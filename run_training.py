@@ -145,8 +145,13 @@ def main():
         cfg["device"] = args.device
         logger.info("Device overridden via CLI: %s", args.device)
 
+    seed = cfg.get("seed", 42)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
     DEVICE = torch.device(cfg["device"])
-    logger.info("Using device: %s", DEVICE)
+    logger.info("Using device: %s (seed=%d)", DEVICE, seed)
     save_dir = cfg.get("save_dir", "save_temp")
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)

@@ -7,4 +7,5 @@ wandb/
 slurm/logs/
 slurm/wandb_runs/
 .env
+slurm-*
 docs/

@@ -1,4 +1,5 @@
 model: mlp
+seed: 42
 epochs: 100
 batch_size: 128
 img_size: 32

@@ -1,4 +1,5 @@
 model: mlp
+seed: 42
 epochs: 100
 batch_size: 128
 img_size: 32
@@ -37,9 +38,4 @@ optimizer:
       lr: 0.001
       weight_decay: 0.0
 
-loss_terms:
-  - name: group_lasso
-    lambda: 1
-    kwargs:
-      lambda_linear: 0.001
-      lambda_conv: 0.0
+loss_terms: []
