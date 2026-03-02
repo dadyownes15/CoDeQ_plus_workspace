@@ -27,4 +27,3 @@ def group_lasso(model, lambda_linear, lambda_conv):
 LOSS_REGISTRY = {
     "group_lasso": group_lasso,
 }
-tw
